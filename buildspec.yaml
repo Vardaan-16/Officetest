@@ -5,8 +5,8 @@ env:
     REPOSITORY_URI: "https://github.com/Vardaan-16/Officetest"
     
   secrets-manager:
-    DOCKERHUB_USERNAME: "arn:aws:secretsmanager:us-east-2:368772107083:secret:Vardaan-o0y0Au:username"
-    DOCKERHUB_PASSWORD: "arn:aws:secretsmanager:us-east-2:368772107083:secret:Vardaan-o0y0Au:password"
+    DOCKERHUB_USERNAME: "arn:aws:secretsmanager:us-east-2:368772107083:secret:docker/Account/credentials-1NLbNK:username"
+    DOCKERHUB_PASSWORD: "arn:aws:secretsmanager:us-east-2:368772107083:secret:docker/Account/credentials-1NLbNK:password"
 
 phases:
   pre_build:
