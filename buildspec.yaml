@@ -1,9 +1,20 @@
 Version: 0.2
+env:
+  variables:
+    ECR_URI: "https://us-east-2.console.aws.amazon.com/ecr/repositories/private/368772107083/officetest?region=us-east-2"
+    REPOSITORY_URI: "https://github.com/Vardaan-16/Officetest"
+    
+  secrets-manager:
+    DOCKERHUB_USERNAME: "arn:aws:secretsmanager:us-east-2:368772107083:secret:Vardaan-o0y0Au:username"
+    DOCKERHUB_PASSWORD: "arn:aws:secretsmanager:us-east-2:368772107083:secret:Vardaan-o0y0Au:password"
+
 phases:
   pre_build:
     commands:
-      - echo logging in to Amazon ECR...
-      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - echo Logging in to Docker Hub...
+      - echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin $ECR_URI
   build:
     commands:
       - echo build started on 'date'
