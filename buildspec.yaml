@@ -7,10 +7,10 @@ phases
     commands:
       - echo build started on 'date'
       - echo building the Docker image..
-      - docker build -t nextjs:latest
-      - docker tag nextjs:latest 368772107083.dkr.ecr.us-east-2.amazonaws.com/officetest:new
+      - docker build -t nextjs:1
+      - docker tag nextjs:1 368772107083.dkr.ecr.us-east-2.amazonaws.com/officetest
   post_build:
     commands:  
       - echo build complete 'date'
       - echo pushing the docker image
-      - docker push 368772107083.dkr.ecr.us-east-2.amazonaws.com/officetest:new
+      - docker push 368772107083.dkr.ecr.us-east-2.amazonaws.com/officetest
