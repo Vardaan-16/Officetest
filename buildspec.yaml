@@ -19,10 +19,10 @@ phases:
     commands:
       - echo build started on 'date'
       - echo building the Docker image..
-      - docker build -t nextjs:1
-      - docker tag nextjs:1 368772107083.dkr.ecr.us-east-2.amazonaws.com/officetest
+      - docker build -t $REPOSITORY_URI:nestjs .
+      - docker tag $REPOSITORY_URI:nestjs $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:  
       - echo build complete 'date'
       - echo pushing the docker image
-      - docker push 368772107083.dkr.ecr.us-east-2.amazonaws.com/officetest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
