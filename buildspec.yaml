@@ -2,15 +2,15 @@ phases
   pre_build:
     commands:
       - echo logging in to Amazon ECR...
-      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - $(aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 368772107083.dkr.ecr.us-east-2.amazonaws.com)
   build:
     commands:
       - echo build started on 'date'
       - echo building the Docker image..
       - docker build -t nextjs:latest
-      - docker tag nextjs:latest 368772107083.dkr.ecr.us-east-2.amazonaws.com/officetest:nextjs
+      - docker tag nextjs:latest 368772107083.dkr.ecr.us-east-2.amazonaws.com/officetest:new
   post_build:
     commands:  
       - echo build complete 'date'
       - echo pushing the docker image
-      - docker push 368772107083.dkr.ecr.us-east-2.amazonaws.com/officetest:nextjs 
+      - docker push 368772107083.dkr.ecr.us-east-2.amazonaws.com/officetest:new
