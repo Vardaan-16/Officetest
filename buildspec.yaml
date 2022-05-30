@@ -27,7 +27,7 @@ phases:
       - echo pushing the docker image
       - docker push $ECR_URI:$IMAGE_TAG
       - echo Writing imageDetail file...
-      - printf '[{"name":"nestjs","imageUri":"368772107083.dkr.ecr.us-east-2.amazonaws.com/officetest:latest"}]' > imagedefinitions.json 
-artifacts:
+      - printf '[{"name":"nestjs","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+artifacts: 
   files: 
-    - imagedefinitions.json
+      - imagedefinitions.json
