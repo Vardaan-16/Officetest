@@ -28,6 +28,6 @@ phases:
       - docker push $ECR_URI:$IMAGE_TAG
       - echo Writing imageDetail file...
       - printf '[{"name":"nestjs","imageUri":"368772107083.dkr.ecr.us-east-2.amazonaws.com/officetest:latest"}]' > imagedefinitions.json 
-  artifacts:
-    files: 
-      - imagedefinitions.json
+artifacts:
+  files: 
+    - imagedefinitions.json
