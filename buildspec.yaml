@@ -1,9 +1,5 @@
 Version: 0.2
-env:
-  variables:
-    ECR_URI: "368772107083.dkr.ecr.us-east-2.amazonaws.com/officetest"
-    REPOSITORY_URI: "https://github.com/Vardaan-16/Officetest"
-    
+env:    
   secrets-manager:
     DOCKERHUB_USERNAME: "arn:aws:secretsmanager:us-east-2:368772107083:secret:docker/Account/credentials-1NLbNK:username"
     DOCKERHUB_PASSWORD: "arn:aws:secretsmanager:us-east-2:368772107083:secret:docker/Account/credentials-1NLbNK:password"
@@ -27,7 +23,7 @@ phases:
       - echo pushing the docker image
       - docker push $ECR_URI:$IMAGE_TAG
       - echo Writing imageDetail file...
-      - printf '[{"name":"nestjs","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - printf '{"ImageURI":"%s"}' $REPOSITORY_URI:$IMAGE_TAG > imageDetail.json
 artifacts: 
   files: 
-      - imagedefinitions.json
+      - imageDetail.json
