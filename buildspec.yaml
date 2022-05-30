@@ -15,8 +15,8 @@ phases:
     commands:
       - echo build started on 'date'
       - echo building the Docker image..
-      - docker build -t $ECR_URI:nestjs .
-      - docker tag $ECR_URI:nestjs $ECR_URI:$IMAGE_TAG
+      - docker build -t $ECR_URI:latest .
+      - docker tag $ECR_URI:latest $ECR_URI:$IMAGE_TAG
   post_build:
     commands:  
       - echo build complete 'date'
