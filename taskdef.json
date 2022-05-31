@@ -1,0 +1,7 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "nestjs",
+      "image": "ECR_URI:nestjs",
+                      } ]
+}
