@@ -24,9 +24,8 @@ phases:
       - docker push $ECR_URI:$IMAGE_TAG
       - echo Writing imageDetail file...
       - printf '{"ImageURI":"%s"}' $ECR_URI:$IMAGE_TAG > imageDetail.json
-      - printf '{"containerDefinitions": [{"name": "nestjs","image": "%s"}]}' $ECR_URI:$IMAGE_TAG > taskdef.json
 artifacts: 
   files: 
       - imageDetail.json
-      - taskdef.json
+     
      
