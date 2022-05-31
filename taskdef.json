@@ -3,7 +3,7 @@
     "containerDefinitions": [
         {
             "name": "nestjs",
-            "image": "<IMAGE1_NAME>",
+            "image": "$ECR_URI:$IMAGE_TAG",
             "essential": true,
             "portMappings": [
                 {
