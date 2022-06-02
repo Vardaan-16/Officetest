@@ -3,7 +3,7 @@
     "containerDefinitions": [
         {
             "name": "nestjs",
-            "image": "368772107083.dkr.ecr.us-east-2.amazonaws.com/officetest:nestjs",
+            "image": "368772107083.dkr.ecr.us-east-2.amazonaws.com/officetest:latest",
             "essential": true,
             "portMappings": [
                 {
