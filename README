@@ -1,0 +1,64 @@
+Steps for kalibra Architecture and Automation:-
+      
+    • Create a RDS database and pass the configuration in the .env file.
+    • For Roles, go the IAM and Create the Following roles;
+    • Codebuild – AmazonEC2containerregistryfullaccess, secretmanagerreadwrite, cloudwatchfullaccess, codedeployfullaccess.
+    • CodeDeploy – Select service for ECS and attach the AWScodedeployroleforECS, AmazonElasticContainerRegistryPublicPowerUser.
+    • CodePipeline – Select serice as codepipeline and attach the s3 and codepipeline access. 
+      --------------------------------------------------------------------------------------------------------------
+
+1.) Create a DockerFile
+2.) Pushing the Dockerfile into ECR.
+3.) Create the ECS Cluster.
+4.) Create task Definition in ECS Cluster.
+5.) Now Create a Target group with port 80 and in health check section assign the port 3000 with the path defined.
+6.) Now Create a Application Load Balancer with Listner as IP and add this Target group.
+7.) Now Go to ECS and inside the cluster, create a fargate service and add that load balancer to this service. This service will also deploy a Deploy Application automatically for code deploy.
+
+Files Required for CI/CD:-
+    • buildspec.yaml
+    • appspec.yaml
+    • taskdef.json
+
+Create these Files and upload the github.
+
+CI/CD – AWS Code Pipeline:-
+
+Source -------------------Code Build-------------------CodeDeploy = Code Pipeline
+
+1.) Create a Build Project inside the CodeBuild section of the pipeline.
+2.) Select Source Provider as Github and select the repo of your project.
+3.) In Envireonment section, select Managed Image and Make sure to check the check box of Privileged.
+4.) Under Additional Configuration, Give the Env variables as follows:
+
+   a.) DOCKERHUB_USERNAME – 
+   b.) DOCKERHUB_PASSWORD - 
+   c.) AWS_REGION – 
+   d.) AWS_ACCOUNT_ID -
+   e.) IMAGE_TAG – latest
+   f.) ECR_URI - 772107083.dkr.ecr.us-east-2.amazonaws.com/officetest
+   g.) REPOSITORY_URI -  
+
+5.) Specify the buildspec.yaml
+6.) In Artifact section, Specify the S3 and then select the bucket name adn save as zip.
+7.) Create the Build Project.
+
+Now Come to the Pipeline Section:-
+ 
+1.) Specify a name for the pipeline.
+2.) Select the role, and arn and hit Next.
+3.) Under Source Provider select Github v2and configure the branch and repo.
+4.) In Build Provider, select Code build and select the project that we have previously created.
+5.) Under deploy Provider, Select ECS(Blue/Green), and select the code deploy application that was previously created during the ECS service steps.
+6.) Select Build Artifact in task definition and specify the name.
+7.) Select Build Artifact under Code deploy Appspec and specify the name.
+8.) Under Dynamically update task definition, select build artifact and under name section specify IMAGE1_NAME.
+9.) Review the Pipeline and create the pipeline.
+
+
+Note -- Artifact for Build wil be Source Artifact stored in S3 and Artifact for Code Deploy will be Build Artifact stored in S3.
+
+
+
+------------------------------------------------------------------------------------------------------------------------
+
