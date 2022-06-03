@@ -19,7 +19,7 @@ Files Required for CI/CD:-
     • buildspec.yaml
     • appspec.yaml
     • taskdef.json
-
+In taskdef.json, specify image = "<IMAGE1_NAME>"
 Create these Files and upload the github.
 
 CI/CD – AWS Code Pipeline:-
