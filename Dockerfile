@@ -3,7 +3,6 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 COPY tsconfig*.json ./
 COPY src ./src
-RUN npm i
 RUN npm install -g npm@8.10.0
 RUN npm install
 RUN npm run build
